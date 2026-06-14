@@ -5,12 +5,15 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.client.session.aiohttp import AiohttpSession
 
+# Handlers
+from command_handlers.start_handler import start_router
+from command_handlers.date_handler import date_router
+from command_handlers.echo_handler import echo_router
+
 # Other libraries
 import asyncio
 import logging
 from os import getenv
-from datetime import datetime
-from zoneinfo import ZoneInfo
 
 """Config logging"""
 logging.basicConfig(level=logging.INFO)
@@ -22,36 +25,12 @@ PROXY = getenv("PROXY")
 """Create dispatcher"""
 dp = Dispatcher()
 
-"""Command handlers"""
-# Start handler
-@dp.message(Command("start"))
-async def command_start_handler(message: Message) -> None:
-    try:
-        await message.answer("Hi")
-    except Exception as e:
-        logging.error(f"Error in start handler: {e}")
-        await message.answer("Sorry, couldn't process the /start")
-
-# Date handler
-@dp.message(Command("date"))
-async def command_date_handler(message: Message) -> None:
-    try:
-        timezone_tehran = ZoneInfo("Asia/Tehran")
-        now_tehran = datetime.now(timezone_tehran)
-        formatted_now_tehran = now_tehran.strftime("%B %d, %Y at %I:%M %p")
-        await message.reply(f"Tehran: {formatted_now_tehran}")
-    except Exception as e:
-        logging.error(f"Error in date handler: {e}")
-        await message.reply("Sorry, couldn't process the /date.")
-    
-# Echo handler
-@dp.message()
-async def echo_handler(message: Message) -> None:
-    try:
-        await message.answer("I don't understand that message. Try /start or /date")
-    except Exception as e:
-        logging.error(f"Error in echo handler: {e}")
-        await message.answer("Sorry, couldn't process your message.")
+"""Insert command-handler-routers in dispatcher"""
+dp.include_routers(
+    start_router,
+    date_router,
+    echo_router
+)
 
 """Main runner"""
 async def main() -> None:
