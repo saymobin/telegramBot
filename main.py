@@ -1,8 +1,6 @@
 """Import libraries"""
 # Aiogram modules
 from aiogram import Bot, Dispatcher
-from aiogram.filters import Command
-from aiogram.types import Message
 from aiogram.client.session.aiohttp import AiohttpSession
 
 # Handlers
