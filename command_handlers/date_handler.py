@@ -6,9 +6,14 @@ from aiogram.types import Message
 
 # Other libraries
 import logging
+from os import getenv
+from dotenv import load_dotenv
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+"""Config variables"""
+load_dotenv()
+DATE_STAT = getenv("DATE_COMMAND")
 
 """Create router for date handler"""
 date_router = Router()

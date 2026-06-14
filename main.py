@@ -4,19 +4,20 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.session.aiohttp import AiohttpSession
 
 # Handlers
-from command_handlers.start_handler import start_router
-from command_handlers.date_handler import date_router
-from command_handlers.echo_handler import echo_router
+from command_handlers.start_handler import start_router, START_STAT
+from command_handlers.date_handler import date_router, DATE_STAT
 
 # Other libraries
 import asyncio
 import logging
 from os import getenv
+from dotenv import load_dotenv
 
 """Config logging"""
 logging.basicConfig(level=logging.INFO)
 
 """Config variables"""
+load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 PROXY = getenv("PROXY")
 
@@ -24,11 +25,14 @@ PROXY = getenv("PROXY")
 dp = Dispatcher()
 
 """Insert command-handler-routers in dispatcher"""
-dp.include_routers(
-    start_router,
-    date_router,
-    echo_router
-)
+routers_list = []
+
+if int(START_STAT) == 1:
+    routers_list.append(start_router)
+if int(DATE_STAT) == 1:
+    routers_list.append(date_router)
+
+dp.include_routers(*routers_list)
 
 """Main runner"""
 async def main() -> None:
