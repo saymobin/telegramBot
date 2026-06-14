@@ -1,13 +1,15 @@
 ''' Import libraries '''
-# System libraries
-import asyncio
-from os import getenv
-
 # Aiogram modules
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.client.session.aiohttp import AiohttpSession
+
+# Other libraries
+import asyncio
+from os import getenv
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 ''' Config '''
 TOKEN = getenv("BOT_TOKEN")
@@ -20,7 +22,15 @@ dp = Dispatcher()
 # Start handler
 @dp.message(Command("start"))
 async def command_start_handler(message: Message) -> None:
-    await message.answer("Hello! I'm a bot created with aiogram.")
+    await message.answer("Hi")
+
+# Date handler
+@dp.message(Command("date"))
+async def command_date_handler(message: Message) -> None:
+    timezone_tehran = ZoneInfo("Asia/Tehran")
+    now_tehran = datetime.now(timezone_tehran)
+    formatted_now_tehran = now_tehran.strftime("%B %d, %Y at %I:%M %p")
+    await message.reply(f"Tehran: {formatted_now_tehran}")
 
 ''' Main runner '''
 async def main() -> None:
