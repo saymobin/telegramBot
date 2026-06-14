@@ -1,4 +1,4 @@
-''' Import libraries '''
+"""Import libraries"""
 # Aiogram modules
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -11,14 +11,14 @@ from os import getenv
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-''' Config '''
+"""Config"""
 TOKEN = getenv("BOT_TOKEN")
 PROXY = getenv("PROXY")
 
 ''' Create dispatcher '''
 dp = Dispatcher()
 
-''' Command handlers '''
+"""Command handlers"""
 # Start handler
 @dp.message(Command("start"))
 async def command_start_handler(message: Message) -> None:
@@ -31,8 +31,15 @@ async def command_date_handler(message: Message) -> None:
     now_tehran = datetime.now(timezone_tehran)
     formatted_now_tehran = now_tehran.strftime("%B %d, %Y at %I:%M %p")
     await message.reply(f"Tehran: {formatted_now_tehran}")
+    
+# Echo handler
+@dp.message()
+async def echo_handler(message: Message) -> None:
+    await message.answer(
+        "I don't understand that message. Try /start or /date"
+    )
 
-''' Main runner '''
+"""Main runner"""
 async def main() -> None:
     # Set proxy
     session = AiohttpSession(proxy=PROXY)
@@ -43,6 +50,6 @@ async def main() -> None:
     # Run bot
     await dp.start_polling(bot)
 
-''' Runner-file check '''
+"""Runner-file check"""
 if __name__ == "__main__":
     asyncio.run(main())
