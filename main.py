@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.session.aiohttp import AiohttpSession
 
 # Handlers
-from command_handlers.start_handler import start_router, START_STAT
+from command_handlers.start_handler import start_router
 from command_handlers.date_handler import date_router, DATE_STAT
 
 # Other libraries
@@ -18,17 +18,15 @@ logging.basicConfig(level=logging.INFO)
 
 """Config variables"""
 load_dotenv()
-TOKEN = getenv("BOT_TOKEN")
+TOKEN = getenv("BOT_TOKEN1")
 PROXY = getenv("PROXY")
 
 """Create dispatcher"""
 dp = Dispatcher()
 
 """Insert command-handler-routers in dispatcher"""
-routers_list = []
+routers_list = [start_router]
 
-if int(START_STAT) == 1:
-    routers_list.append(start_router)
 if int(DATE_STAT) == 1:
     routers_list.append(date_router)
 

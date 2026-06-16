@@ -6,12 +6,6 @@ from aiogram.types import Message
 
 # Other libraries
 import logging
-from os import getenv
-from dotenv import load_dotenv
-
-"""Config variables"""
-load_dotenv()
-START_STAT = getenv("START_COMMAND")
 
 """Create router for start handler"""
 start_router = Router()
