@@ -7,7 +7,10 @@ from aiogram import Dispatcher
 
 # Command handlers
 from command_handlers.start_handler import start_router
-from command_handlers.date_handler import date_router, DATE_STAT
+from command_handlers.date_handler import date_router
+
+# Config
+from config import DATE_STATUS
 
 """Config logging"""
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +21,6 @@ dp = Dispatcher()
 
 # Insert command-handler-routers in dispatcher
 routers_list = [start_router]
-if int(DATE_STAT) == 1:
+if DATE_STATUS == "1":
     routers_list.append(date_router)
 dp.include_routers(*routers_list)

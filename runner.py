@@ -1,11 +1,7 @@
 """Import libraries"""
 # Other libraries
-from dotenv import load_dotenv
-load_dotenv()
-
 import asyncio
 import logging
-from os import getenv
 
 # Aiogram modules
 from aiogram.client.session.aiohttp import AiohttpSession
@@ -14,15 +10,14 @@ from aiogram import Bot
 # Main
 from main import dp
 
+# Config
+from config import TOKEN, PROXY
+
 """Config logging"""
 logging.basicConfig(level=logging.INFO)
 
-"""Config variables"""
-TOKEN = getenv("BOT_TOKEN1")
-PROXY = getenv("PROXY")
-
 """Runner"""
-async def bot_runner(dp) -> None:
+async def bot_runner() -> None:
     # Set proxy
     session = AiohttpSession(proxy=PROXY) if PROXY else AiohttpSession()
     
@@ -39,4 +34,4 @@ async def bot_runner(dp) -> None:
         
 """Runner-file check"""
 if __name__ == "__main__":
-    asyncio.run(bot_runner(dp=dp))
+    asyncio.run(bot_runner())
