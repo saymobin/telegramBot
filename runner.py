@@ -1,7 +1,6 @@
 """Import libraries"""
 # Other libraries
 import asyncio
-import logging
 
 # Aiogram modules
 from aiogram.client.session.aiohttp import AiohttpSession
@@ -12,9 +11,6 @@ from main import dp
 
 # Config
 from config import TOKEN, PROXY
-
-"""Config logging"""
-logging.basicConfig(level=logging.INFO)
 
 """Runner"""
 async def bot_runner() -> None:

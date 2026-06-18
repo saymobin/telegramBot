@@ -1,3 +1,4 @@
+"""Import libraries"""
 # Other libraries
 from dotenv import load_dotenv
 from os import getenv
