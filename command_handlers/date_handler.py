@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 """Create router for date handler"""
 date_router = Router()
 
-"""Start handler"""
+"""Date handler"""
 @date_router.message(Command("date"))
 async def command_date_handler(message: Message) -> None:
     try:

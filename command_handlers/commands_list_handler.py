@@ -10,7 +10,7 @@ import logging
 """Create router for commands_list handler"""
 commands_list_router = Router()
 
-"""commands_list handler"""
+"""Commands_list handler"""
 @commands_list_router.message(Command("commands_list"))
 async def command_commands_list_handler(message: Message) -> None:
     try:
