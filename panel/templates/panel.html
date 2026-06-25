@@ -65,7 +65,7 @@
   <div class="card">
     <div class="card-title"><i class="ti ti-key"></i> Bot token</div>
     <div class="token-row">
-      
+
       <input type="password" id="token-input" name="token"
       value="{{ bot_token | default('') }}"
       placeholder="Paste token from BotFather" />
@@ -90,10 +90,41 @@
     </div>
   </div>
 
+  <!-- Proxy -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-key"></i> Proxy</div>
+      <div class="feature-row">
+        <div class="feature-info" style="display:flex; align-items:flex-start; gap:10px; flex:1;">
+          <div style="flex:1">
+            <div class="feature-name">Route bot traffic through a proxy server</div>
+            <div class="proxy-input" id="proxy-input">
+
+              <input type="text" id="proxy-input" name="proxy" placeholder="http://user:pass@host:port" />
+
+              <button class="btn btn-ghost" style="height:34px; font-size:12px;"
+              hx-post="/api/proxy"
+              hx-include="#proxy-input"
+              hx-swap="none"
+              onclick="showToast('Proxy saved')">Save</button>
+
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+          <span class="badge badge-optional">optional</span>
+          <label class="toggle">
+            <input type="checkbox" onchange="toggleProxy(this)" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Features -->
   <div class="card">
     <div class="card-title"><i class="ti ti-puzzle"></i> Features</div>
 
+    <!-- Start -->
     <div class="feature-row">
       <div class="feature-info">
         <div class="feature-name">/start</div>
@@ -102,60 +133,50 @@
       <span class="badge badge-locked"><i class="ti ti-lock" style="font-size:11px"></i> Always on</span>
     </div>
 
+    <!-- Commands list -->
+    <div class="feature-row">
+      <div class="feature-info">
+        <div class="feature-name">/commands_list</div>
+        <div class="feature-desc">Lists all available commands</div>
+      </div>
+      <span class="badge badge-locked"><i class="ti ti-lock" style="font-size:11px"></i> Always on</span>
+    </div>
+
+    <!-- Date -->
     <div class="feature-row">
       <div class="feature-info">
         <div class="feature-name">/date</div>
         <div class="feature-desc">Shows current date & time in Tehran timezone</div>
       </div>
       <label class="toggle">
-        <input type="checkbox" checked onchange="onToggle(this, 'DATE_STATUS')" />
+
+        <input type="checkbox" id="date_toggle" name="date_toggle"
+          hx-post="/api/date_toggle"
+          hx-swap="none"
+          checked onchange="onToggle(this, 'DATE_STATUS')" />
+
         <span class="slider"></span>
       </label>
     </div>
 
+    <!-- Echo -->
     <div class="feature-row">
       <div class="feature-info">
         <div class="feature-name">echo</div>
         <div class="feature-desc">Mirrors every message back to the user</div>
       </div>
       <label class="toggle">
-        <input type="checkbox" onchange="onToggle(this, 'ECHO_STATUS')" />
+
+        <input type="checkbox" id="echo_toggle" name="echo_toggle"
+          hx-post="/api/echo_toggle"
+          hx-swap="none"
+          onchange="onToggle(this, 'ECHO_STATUS')" />
+          
         <span class="slider"></span>
       </label>
-    </div>
-
-    <div class="feature-row">
-      <div class="feature-info">
-        <div class="feature-name">/commands_list</div>
-        <div class="feature-desc">Lists all available commands</div>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" checked onchange="onToggle(this, 'COMMANDS_STATUS')" />
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="feature-row">
-      <div class="feature-info" style="display:flex; align-items:flex-start; gap:10px; flex:1;">
-        <div style="flex:1">
-          <div class="feature-name">proxy</div>
-          <div class="feature-desc">Route bot traffic through a proxy server</div>
-          <div class="proxy-input" id="proxy-input">
-            <input type="text" placeholder="http://user:pass@host:port" />
-            <button class="btn btn-ghost" style="height:34px; font-size:12px;" onclick="showToast('Proxy saved')">Save</button>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-        <span class="badge badge-optional">optional</span>
-        <label class="toggle">
-          <input type="checkbox" onchange="toggleProxy(this)" />
-          <span class="slider"></span>
-        </label>
-      </div>
     </div>
   </div>
-
+  
   <!-- Logs -->
   <div class="card">
     <div class="log-header">

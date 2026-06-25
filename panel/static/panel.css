@@ -297,7 +297,7 @@
   .feature-name {
     font-size: 13.5px;
     font-weight: 500;
-    color: var(--text);
+    color: var(--text2);
     font-family: var(--mono);
     margin-bottom: 2px;
   }

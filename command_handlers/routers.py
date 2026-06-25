@@ -10,7 +10,7 @@ from config import DATE_STATUS, ECHO_STATUS
 
 # Create routers list
 routers_list = [start_router, commands_list_router]
-if DATE_STATUS == "1":
+if DATE_STATUS == "on":
     routers_list.append(date_router)
-if ECHO_STATUS == "1":
+if ECHO_STATUS == "on":
     routers_list.append(echo_router)
