@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
 <link rel="stylesheet" href="../static/panel.css">
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
 
@@ -64,9 +65,24 @@
   <div class="card">
     <div class="card-title"><i class="ti ti-key"></i> Bot token</div>
     <div class="token-row">
-      <input type="password" id="token-input" value="7412938472:AAFx8xKmQ9TzExample" placeholder="Paste token from BotFather…" />
-      <button class="btn btn-ghost" onclick="testToken()"><i class="ti ti-plug"></i> Test</button>
-      <button class="btn btn-accent" onclick="saveToken()"><i class="ti ti-device-floppy"></i> Save</button>
+      
+      <input type="password" id="token-input" name="token"
+      value="{{ bot_token | default('') }}"
+      placeholder="Paste token from BotFather" />
+
+      <button class="btn btn-ghost"
+        onclick="testToken()">
+        <i class="ti ti-plug"></i> Test
+      </button>
+
+      <button class="btn btn-accent"
+        hx-post="/api/token"
+        hx-include="#token-input"
+        hx-swap="none"
+        onclick="saveToken()">
+        <i class="ti ti-device-floppy"></i> Save
+      </button>
+
     </div>
     <div class="token-hint">
       <i class="ti ti-shield-lock"></i>
