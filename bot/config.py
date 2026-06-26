@@ -1,10 +1,13 @@
 """Import libraries"""
 # Other libraries
+from pathlib import Path
 from dotenv import load_dotenv
 from os import getenv
 
+ENV_PATH = Path(__file__).parent.parent / ".env"
+
 """Load variables"""
-load_dotenv()
+load_dotenv(ENV_PATH)
 
 TOKEN = getenv("BOT_TOKEN1")
 if not TOKEN:
