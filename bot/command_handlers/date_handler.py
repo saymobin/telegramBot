@@ -22,4 +22,4 @@ async def command_date_handler(message: Message) -> None:
         await message.reply(f"Tehran: {formatted_now_tehran}")
     except Exception as e:
         logging.error(f"Error in date handler: {e}")
-        await message.answer("Sorry, couldn't process the /date")
+        await message.reply("Sorry, couldn't process the /date")

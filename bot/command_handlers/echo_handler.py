@@ -19,4 +19,4 @@ async def echo_handler(message: Message) -> None:
         await message.answer("Nice try!")
     except Exception as e:
         logging.error(f"Error in echo handler: {e}")
-        await message.answer("Sorry, couldn't process your message.")
+        await message.reply("Sorry, couldn't process your message.")

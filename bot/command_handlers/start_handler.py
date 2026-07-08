@@ -4,6 +4,9 @@ from aiogram import Router, html
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
+# Commands_list
+from .routers import commands_list
+
 # Other libraries
 import logging
 
@@ -14,7 +17,10 @@ start_router = Router()
 @start_router.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     try:
-        await message.answer(f"Hello, {html.bold(message.from_user.full_name)}!")
+        await message.answer(
+            f"Hello {html.bold(message.from_user.full_name)}!\n"
+            "this is my commands:\n"
+            f"{"\n".join(commands_list)}")
     except Exception as e:
         logging.error(f"Error in start handler: {e}")
-        await message.answer("Sorry, couldn't process the /start")
+        await message.reply("Sorry, couldn't process the /start")

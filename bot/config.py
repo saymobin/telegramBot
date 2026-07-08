@@ -15,3 +15,4 @@ if not TOKEN:
 PROXY = getenv("PROXY")
 DATE_STATUS = getenv("DATE_STATUS")
 ECHO_STATUS = getenv("ECHO_STATUS")
+COLOR_STATUS = getenv("COLOR_STATUS")
