@@ -1,11 +1,11 @@
 import psycopg
 
 conn = psycopg.connect(
-    host="localhost",
+    host="",
     port=5432,
-    dbname="telegram_project",
-    user="postgres",
-    password="1234"
+    dbname="",
+    user="",
+    password=""
 )
 
 try:
