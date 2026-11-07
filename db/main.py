@@ -1,15 +1,25 @@
 import psycopg
 
-with psycopg.connect(
+conn = psycopg.connect(
     host="localhost",
     port=5432,
     dbname="telegram_project",
     user="postgres",
     password="1234"
-) as conn:
+)
+
+try:
     with conn.cursor() as cur:
-        cur.execute('''SELECT id, telegram_id, username, first_name, is_active
-                       FROM users
-                       ORDER BY id;''')
-        result = cur.fetchall()
-        print(result)
+        cur.execute(
+            "UPDATE users SET username = %s WHERE telegram_id = %s",
+            ("mobin_rollback",12345)
+        )
+
+    conn.rollback()
+            
+except psycopg.Error as e:
+    conn.rollback()
+    print(f"Database error: {e}")
+
+finally:
+    conn.close()
